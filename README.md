@@ -1,3 +1,13 @@
+# Install Guide:
+
+Download, unzip and npm install the node_modules for the project, and also the used packages.
+Used npm packages:
+  npm install material
+Also installed, but not used at the end:
+  npm install bootstrap
+  npm install jquery
+
+
 # ScientificFrontEnd
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.5.
