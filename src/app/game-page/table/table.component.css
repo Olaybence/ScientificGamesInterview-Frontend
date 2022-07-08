@@ -1,0 +1,53 @@
+.table {
+    width: 95%;
+    height: 95%;
+    padding: 5px;
+}
+
+.cell {
+    padding: 2px;
+    margin: 1px;
+    height: 20px;
+    width: 20px;
+    border: 1px red solid;
+    text-align: center;
+    font-weight: 600;
+    color: red;
+}
+
+.hovered {
+    position: absolute;
+    left: 6px;
+    top: 1px;
+    color: black;
+}
+
+.table-header {
+    width: 90%;
+    height: 25px;
+    margin: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.bg-id {
+    position: absolute;
+    font-size: 150px;
+    top: -100px;
+    opacity: 25%;
+    font-weight: 600;
+}

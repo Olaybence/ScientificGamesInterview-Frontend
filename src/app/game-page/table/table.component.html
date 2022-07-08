@@ -1,0 +1,22 @@
+<div class="column">
+    <p class="bg-id">{{id + 1}}</p>
+    <div class="table-header">
+        <p class="center" (click)="shuffle()">
+        <mat-icon>shuffle</mat-icon> RND
+        </p>
+        <p class="center" (click)="delete()">
+        <mat-icon>delete</mat-icon>DEL
+        </p>
+    </div>
+
+    <mat-grid-list class="table" cols="{{tableSize}}" rowHeight="1.3:1">
+        <ng-container *ngFor="let x of rowId">
+            <mat-grid-tile *ngFor="let y of columnId">
+                <div class="cell" (click)="cellClicked(x,y)">
+                    <mat-icon *ngIf="marked[x][y]" class="hovered">clear</mat-icon>
+                    {{x*tableSize + y + 1}}
+                </div>
+            </mat-grid-tile>
+        </ng-container>
+    </mat-grid-list>
+</div>

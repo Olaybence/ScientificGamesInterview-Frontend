@@ -1,0 +1,30 @@
+<div>
+    <app-header></app-header>
+</div>
+<div class="form">
+    <form [formGroup]="login" (ngSubmit)="onSubmit()">
+        <!-- TODO: Make select user writeable (Find a good solution/angular component for this) 
+                Further discussion needed about the implementation -->
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <select matNativeControl formControlName="name" required>
+                    <option *ngFor="let user of users;" [value]="user.name">{{user.name}}</option>
+                </select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label class="">{{wrongPassword ? "Wrong password" : "Enter your password"}}</mat-label>
+                <input matInput required [type]="hide ? 'password' : 'text'"  formControlName="pwd">
+                <!-- TODO: Make enter to submit and not revealing the password -->
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div>
+            <button mat-raised-button color="primary" class="button" type="submit">Login</button>
+        </div>
+    </form>
+</div>

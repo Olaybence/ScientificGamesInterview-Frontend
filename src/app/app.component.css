@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-content: space-around;
+    flex-wrap: nowrap;
+    align-items: center;
+    flex-direction: column;
+}
