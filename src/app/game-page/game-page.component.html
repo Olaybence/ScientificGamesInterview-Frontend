@@ -11,46 +11,11 @@
   <!-- Game tables -->
   <mat-grid-list cols="2" rowHeight="1:1">
     <mat-grid-tile class="table-container" *ngFor="let i of numbers">
-        <game-table class="table" [id]="i" [tableSize]="tableSize"></game-table>
+        <game-table class="table" [id]="i"></game-table>
     </mat-grid-tile>
   </mat-grid-list>
 
-  <!-- <mat-grid-list cols="2" rowHeight="2:1">
-    <mat-grid-tile class="table-container">
-      <div class="column">
-        <p class="table-header">
-          <mat-icon>visibility</mat-icon>
-          <mat-icon>visibility</mat-icon>
-        </p>
-        <game-table class="table" [id]="0"></game-table>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile class="table-container">
-      <div class="column">
-        <p class="table-header">
-          <mat-icon>visibility</mat-icon>
-          <mat-icon>visibility</mat-icon>
-        </p>
-        <game-table class="table" [id]="1"></game-table>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile class="table-container">
-      <div class="column">
-        <p class="table-header">
-          <mat-icon>visibility</mat-icon>
-          <mat-icon>visibility</mat-icon>
-        </p>
-        <game-table class="table" [id]="2"></game-table>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile class="table-container">
-      <div class="column">
-        <p class="table-header">
-          <mat-icon>visibility</mat-icon>
-          <mat-icon>visibility</mat-icon>
-        </p>
-        <game-table class="table" [id]="3"></game-table>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list> -->
+  <div class="play">
+    <button class="playText" mat-raised-button (click)="play()">Play</button>
+  </div>
 </div>

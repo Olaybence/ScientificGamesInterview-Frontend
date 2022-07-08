@@ -1,0 +1,9 @@
+<p>Panel 1: {{tables[0].toString()}}</p>
+<p>Panel 2: {{tables[1].toString()}}</p>
+<p>Panel 3: {{tables[2].toString()}}</p>
+<p>Panel 4: {{tables[3].toString()}}</p>
+<!-- TODO: Many problems: cannot ngFor || cant make toString() to return "empty" -->
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="onNoClick()">Close</button>
+</div>
+<!-- TODO: No material css visible in Dialog -->

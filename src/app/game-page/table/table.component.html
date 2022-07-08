@@ -13,7 +13,7 @@
         <ng-container *ngFor="let x of rowId">
             <mat-grid-tile *ngFor="let y of columnId">
                 <div class="cell" (click)="cellClicked(x,y)">
-                    <mat-icon *ngIf="marked[x][y]" class="hovered">clear</mat-icon>
+                    <mat-icon *ngIf="chosenOnes.get(x,y)" class="hovered">clear</mat-icon>
                     {{x*tableSize + y + 1}}
                 </div>
             </mat-grid-tile>

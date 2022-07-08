@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RandomService } from 'src/services/random.service';
+import { GlobalConstants, Table } from 'src/utils/global-constants';
 
 @Component({
   selector: 'game-table',
@@ -8,14 +9,14 @@ import { RandomService } from 'src/services/random.service';
 })
 export class TableComponent implements OnInit {
 
-  @Input() id: number = -1;
-  
+  @Input() chosenOnes: Table = new Table(GlobalConstants.tableSize,GlobalConstants.tableSize);
+
   // Question: Can it be rectangle or only cube shaped table
   // Could it have not full row?
-  @Input() tableSize: number = 7;
+  @Input() id: number = -1;
+  tableSize: number = GlobalConstants.tableSize;
   columnId: number[] = [];
   rowId: number[] = [];
-  marked: boolean[][] = [];
   selected: number = 0;
   maxSelect: number = 6;
 
@@ -27,48 +28,59 @@ export class TableComponent implements OnInit {
     this.columnId = Array(this.tableSize).fill(0).map((x,i)=>i);
     this.rowId = Array(this.tableSize).fill(0).map((x,i)=>i);
 
-    this.marked = Array(this.tableSize).fill(false).map((x,i) => {
-      return Array(this.tableSize).fill(false).map((x,i)=> false)
-    });
-    console.log("marked");
-    console.log(this.marked);
+    this.chosenOnes = new Table(this.tableSize,this.tableSize);
+    console.log("chosenOnes");
+    console.log(this.chosenOnes);
   }
-  
+
   cellClicked(x: number, y: number) {
     console.log("Cell clicked",x,y);
-    if(this.marked[x][y]) {
-      this.marked[x][y] = false;
+    if(this.chosenOnes.get(x,y)) {
+      this.chosenOnes.set(x,y,false);
       this.selected--;
-      console.log(x,y," was unselected");
-      
+      console.log(x,y," was unselected:",this.selected);
+
     } else if(this.selected < this.maxSelect) {
-      this.marked[x][y] = true;
+      this.chosenOnes.set(x,y,true);
       this.selected++;
-      console.log(x,y," was selected");
+      console.log(x,y," was selected:",this.selected);
 
     } else {
-      console.log("Reached the maximum number")
+      console.log("Reached the maximum number:",this.selected)
     }
+    
+    GlobalConstants.allChosenNumber[this.id] = this.chosenOnes;
   }
 
   delete() {
     console.log("Delete");
-    this.marked = Array(this.tableSize).fill(false).map((x,i) => {
-      return Array(this.tableSize).fill(false).map((x,i)=> false)
-    });
+    this.chosenOnes = new Table(GlobalConstants.tableSize,GlobalConstants.tableSize);
+    GlobalConstants.allChosenNumber[this.id] = this.chosenOnes;
+    this.selected = 0;
   }
 
   shuffle() {
     console.log("Shuffle");
+
     this.rndService.getRandoms(this.maxSelect).subscribe(
       response => {
-        console.log("getRandoms response:",response);
-        response.map( number => {
-          // let row = number / this.tableSize;
-          // let column = number % this.tableSize;
+        // console.log("getRandoms response:",response);
+        let tableSize = this.tableSize;
+        let chosenOnes = new Table(GlobalConstants.tableSize,GlobalConstants.tableSize);
+        let selected = this.selected;
+        response.map( function(number : Number) {
+          // console.log(number);
+          let row = Math.floor(Number(number) / tableSize);
+          let column = Number(number) % tableSize;
+          // console.log(row, column);
+          chosenOnes.set(row,column,true);
+          selected++;
         })
-        // this.marked[x][y] = true;
-        // this.selected++;
+        this.selected = 6;
+        this.chosenOnes = chosenOnes;
+        GlobalConstants.allChosenNumber[this.id] = this.chosenOnes;
+        
+        // console.log(GlobalConstants.allChosenNumber[this.id].toString());
       },
       error => console.log("Something happened with the server. response: ", error)
     );
